@@ -14,7 +14,7 @@ app.get('/apps', (req, res) => {
     const { genres = "", sort } = req.query;
 
 if (sort) {
-  if (!['app', 'rating'].includes(sort)) {
+  if (!['App', 'Rating'].includes(sort)) {
     return res
       .status(400)
       .send('Sort must be one of app or rating');
@@ -23,12 +23,12 @@ if (sort) {
     
 let results = plays.filter(play => play.Genres.includes(genres));
 // I HAVE TO MAKE THE SORT WORK -------------- THE REST IS DONE-------------
-// if(sort) {
-// results
-// .sort((a,b) => {
-// return a[sort] > b[sort] ? 1 : a[sort] < b[sort] ? -1 : 0;
-// });
-// }
+if(sort) {
+results
+.sort((a,b) => {
+return a[sort] > b[sort] ? 1 : a[sort] < b[sort] ? -1 : 0;
+});
+}
 
 res
 .json(results);
